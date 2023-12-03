@@ -1,23 +1,24 @@
-name: Build and Deploy
+name: Build
 
 on:
   push:
+    # main 分支有 push 时触发
     branches: [main]
 
 jobs:
   deploy:
+    # 指定虚拟机环境
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 16
-      - name: Install dependencies
-        run: yarn install
+          version: 8.6.11
+      - name: Install modules
+        run: pnpm install
       - name: Build
-        run: yarn build
+        run: pnpm build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
