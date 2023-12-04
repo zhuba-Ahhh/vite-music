@@ -9,8 +9,7 @@
 
 .iconfont {
     font-size: 16px;
-
-    /* font-family: iconfont !important; */
+    font-family: iconfont, sans-serif !important;
     color: var(--color-text);
     font-style: normal;
     -webkit-font-smoothing: antialiased;

@@ -1,3 +1,11 @@
 dist*
 node_modules
 dist
+
+*.js
+*.jpg
+*.png
+*.eot
+*.ttf
+*.woff
+*.json

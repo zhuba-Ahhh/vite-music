@@ -92,18 +92,29 @@
 <script setup lang="ts">
 // import SongList from '@components/SongList.vue'
 // import CommentList from '@components/Comments.vue'
-import { getCurrentInstance, onMounted, reactive, toRefs } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { formartDate, formatSongs } from '../../utils';
 // import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus';
 // const { proxy } = getCurrentInstance();
 // const store = useStore();
+import { album, albumDynamic, artistAlbum, albumSub, playlistSCollect, Album1, Privilege, Song } from '../../apis';
 const route = useRoute();
-const info = reactive({
+const info = reactive<{
+    albumId: string,
+    details: Partial<Album1>,
+    songList: Song[],
+    dynamic: {},
+    hotAlbums: [],
+    comments: [],
+    type: number, // 0: 歌曲 1: mv 2: 歌单 3: 专辑  4: 电台 5: 视频 6: 动态
+    isShowDesc: boolean,
+    collects: []
+}>({
     // 歌单详情
     albumId: '',
-    details: null,
+    details: {},
     songList: [],
     dynamic: {},
     hotAlbums: [],
@@ -114,20 +125,21 @@ const info = reactive({
 });
 
 // 相关歌单推荐
-const getAlbum = async (params) => {
-    const { data: res } = await album(params)
+const getAlbum = async (params: { id: string }) => {
+    const { data } = await album(params);
+    const { code, album: albumRes, songs } = data;
 
-    if (res.code !== 200) {
+    if (code !== 200) {
         return ElMessage.error('数据请求失败')
     }
 
-    info.details = res.album;
-    const privileges = [];
+    info.details = albumRes;
+    const privileges: Privilege[] = [];
 
-    res.songs.forEach(item => {
+    songs.forEach(item => {
         privileges.push(item.privilege);
     })
-    info.songList = formatSongs(res.songs, privileges);
+    info.songList = formatSongs(songs, privileges);
     getArtistAlbum();
 };
 
@@ -141,7 +153,7 @@ const getAlbumDynamic = async (params) => {
 };
 
 const getArtistAlbum = async () => {
-    const { data: res } = await artistAlbum({ id: info.details.artists[0].id, limit: 5 })
+    const { data: res } = await artistAlbum({ id: info?.details?.artists[0].id, limit: 5 })
 
     if (res.code !== 200) {
         return ElMessage.error('数据请求失败')
@@ -151,7 +163,7 @@ const getArtistAlbum = async () => {
 
 // 专辑简介查看更多
 const showAllDesc = () => {
-    if (info.details.description.length > 120) {
+    if (info.details && info?.details?.description?.length > 120) {
         info.isShowDesc = !info.isShowDesc
     }
 };

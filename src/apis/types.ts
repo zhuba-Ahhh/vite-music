@@ -182,7 +182,7 @@ export interface Artist {
 
 export interface HotListResult {
   code: number;
-  tags: Tag[];
+  tags: Partial<Tag>[];
 }
 
 export interface Tag {
@@ -667,4 +667,658 @@ export interface Dj {
 
 export interface Experts {
   the1: string;
+}
+
+export interface AlbumResult {
+  album: Album1;
+  code: number;
+  resourceState: boolean;
+  songs: Song2[];
+}
+
+export interface Album1 {
+  alias: string[];
+  artist: PurpleArtist1;
+  artists: ArtistElement1[];
+  awardTags: null;
+  blurPicUrl: string;
+  briefDesc: string;
+  commentThreadId: string;
+  company: string;
+  companyId: number;
+  copyrightId: number;
+  description: string;
+  id: number;
+  info: Info;
+  mark: number;
+  name: string;
+  onSale: boolean;
+  paid: boolean;
+  pic: number;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  publishTime: number;
+  size: number;
+  songs: string[];
+  status: number;
+  subType: string;
+  tags: string;
+  type: string;
+}
+
+export interface PurpleArtist1 {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  followed: boolean;
+  id: number;
+  img1V1Id: number;
+  img1V1IdStr: string;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface ArtistElement1 {
+  albumSize?: number;
+  alias?: string[];
+  briefDesc?: string;
+  followed?: boolean;
+  id?: number;
+  img1V1Id?: number;
+  img1V1IdStr?: string;
+  img1V1Url?: string;
+  musicSize?: number;
+  name?: string;
+  picId?: number;
+  picUrl?: string;
+  topicPerson?: number;
+  trans?: string;
+}
+
+export interface Info {
+  commentCount: number;
+  comments: null;
+  commentThread: CommentThread;
+  latestLikedUsers: null;
+  liked: boolean;
+  likedCount: number;
+  resourceId: number;
+  resourceType: number;
+  shareCount: number;
+  threadId: string;
+}
+
+export interface CommentThread {
+  commentCount: number;
+  hotCount: number;
+  id: string;
+  latestLikedUsers: null;
+  likedCount: number;
+  resourceId: number;
+  resourceInfo: ResourceInfo;
+  resourceOwnerId: number;
+  resourceTitle: string;
+  resourceType: number;
+  shareCount: number;
+}
+
+export interface ResourceInfo {
+  creator: null;
+  encodedId: null;
+  id: number;
+  imgUrl: string;
+  name: string;
+  subTitle: null;
+  userId: number;
+  webUrl: null;
+}
+
+export interface Song2 {
+  a: null;
+  al: Al;
+  alia: string[];
+  ar: Ar[];
+  cd: string;
+  cf: string;
+  cp: number;
+  crbt: null;
+  djId: number;
+  dt: number;
+  fee: number;
+  ftype: number;
+  h: H;
+  hr: null;
+  id: number;
+  l: L;
+  m: M;
+  mst: number;
+  mv: number;
+  name: string;
+  no: number;
+  noCopyrightRcmd: null;
+  pop: number;
+  privilege: Privilege;
+  pst: number;
+  rt: string;
+  rtUrl: null;
+  rtUrls: string[];
+  rtype: number;
+  rurl: null;
+  songJumpInfo: null;
+  sq: Sq;
+  st: number;
+  t: number;
+  tns: string[];
+  v: number;
+  videoInfo: VideoInfo;
+}
+
+export interface Al {
+  id: number;
+  name: string;
+  pic: number;
+  picStr: string;
+}
+
+export interface Ar {
+  alia: string[];
+  id: number;
+  name: string;
+}
+
+export interface H {
+  br: number;
+  fid: number;
+  size: number;
+  sr: number;
+  vd: number;
+}
+
+export interface L {
+  br: number;
+  fid: number;
+  size: number;
+  sr: number;
+  vd: number;
+}
+
+export interface M {
+  br: number;
+  fid: number;
+  size: number;
+  sr: number;
+  vd: number;
+}
+
+export interface Privilege {
+  chargeInfoList: ChargeInfoList[];
+  cp: number;
+  cs: boolean;
+  dl: number;
+  dlLevel: string;
+  downloadMaxbr: number;
+  downloadMaxBrLevel: string;
+  fee: number;
+  fl: number;
+  flag: number;
+  flLevel: string;
+  freeTrialPrivilege: FreeTrialPrivilege;
+  id: number;
+  maxbr: number;
+  maxBrLevel: string;
+  payed: number;
+  pl: number;
+  playMaxbr: number;
+  playMaxBrLevel: string;
+  plLevel: string;
+  preSell: boolean;
+  rscl: number;
+  sp: number;
+  st: number;
+  subp: number;
+  toast: boolean;
+}
+
+export interface ChargeInfoList {
+  chargeMessage: null;
+  chargeType: number;
+  chargeUrl: null;
+  rate: number;
+}
+
+export interface FreeTrialPrivilege {
+  listenType: null;
+  resConsumable: boolean;
+  userConsumable: boolean;
+}
+
+export interface Sq {
+  br: number;
+  fid: number;
+  size: number;
+  sr: number;
+  vd: number;
+}
+
+export interface VideoInfo {
+  moreThanOne: boolean;
+  video: null | Video;
+}
+
+export interface Video {
+  artists: null;
+  coverUrl: string;
+  playTime: number;
+  publishTime: number;
+  title: string;
+  type: number;
+  vid: string;
+}
+
+export interface ToplistResponse {
+  artistToplist: ArtistToplist;
+  code: number;
+  list: List[];
+}
+
+export interface ArtistToplist {
+  coverUrl: string;
+  name: string;
+  position: number;
+  upateFrequency: string;
+  updateFrequency: string;
+}
+
+export interface List {
+  adType: number;
+  anonimous: boolean;
+  artists: null;
+  backgroundCoverId: number;
+  backgroundCoverUrl: null;
+  cloudTrackCount: number;
+  commentThreadId: string;
+  coverImageUrl: null;
+  coverImgId: number;
+  coverImgIdStr: string;
+  coverImgUrl: string;
+  coverText: null;
+  createTime: number;
+  creator: null;
+  description: null | string;
+  englishTitle: null;
+  highQuality: boolean;
+  iconImageUrl: null;
+  id: number;
+  name: string;
+  newImported: boolean;
+  opRecommend: boolean;
+  ordered: boolean;
+  playCount: number;
+  privacy: number;
+  recommendInfo: null;
+  socialPlaylistCover: null;
+  specialType: number;
+  status: number;
+  subscribed: null;
+  subscribedCount: number;
+  subscribers: string[];
+  tags: string[];
+  titleImage: number;
+  titleImageUrl: null;
+  toplistType: string;
+  totalDuration: number;
+  trackCount: number;
+  trackNumberUpdateTime: number;
+  tracks: null;
+  trackUpdateTime: number;
+  tsSongCount: number;
+  updateFrequency: string;
+  updateTime: number;
+  userId: number;
+}
+
+export interface TopRankListResponse {
+  code: number;
+  fromUserCount: number;
+  fromUsers: null;
+  playlist: Playlist2;
+  privileges: Privilege2[];
+  relatedVideos: { [key: string]: any };
+  resEntrance: null;
+  sharedPrivilege: null;
+  songFromUsers: null;
+  urls: null;
+}
+
+export interface Playlist2 {
+  adType: number;
+  algTags: null;
+  backgroundCoverId: number;
+  backgroundCoverUrl: null;
+  bannedTrackIds: null;
+  cloudTrackCount: number;
+  commentCount: number;
+  commentThreadId: string;
+  copied: boolean;
+  coverImgId: number;
+  coverImgIdStr: string;
+  coverImgUrl: string;
+  createTime: number;
+  creator: Creator2;
+  description: string;
+  englishTitle: null;
+  gradeStatus: string;
+  highQuality: boolean;
+  historySharedUsers: null;
+  id: number;
+  mvResourceInfos: null;
+  name: string;
+  newImported: boolean;
+  officialPlaylistType: null;
+  opRecommend: boolean;
+  ordered: boolean;
+  playCount: number;
+  privacy: number;
+  relateResType: null;
+  remixVideo: null;
+  score: null;
+  shareCount: number;
+  sharedUsers: null;
+  specialType: number;
+  status: number;
+  subscribed: null;
+  subscribedCount: number;
+  subscribers: Subscriber[];
+  tags: string[];
+  titleImage: number;
+  titleImageUrl: null;
+  trackCount: number;
+  trackIds: TrackId[];
+  trackNumberUpdateTime: number;
+  tracks: Track[];
+  trackUpdateTime: number;
+  trialMode: number;
+  updateFrequency: null;
+  updateTime: number;
+  userId: number;
+  videoIds: null;
+  videos: null;
+}
+
+export interface Creator2 {
+  accountStatus: number;
+  anchor: boolean;
+  authenticationTypes: number;
+  authority: number;
+  authStatus: number;
+  avatarDetail: null;
+  avatarImgId: number;
+  creatorAvatarImgIdStr: string;
+  avatarImgIdStr: string;
+  avatarUrl: string;
+  backgroundImgId: number;
+  backgroundImgIdStr: string;
+  backgroundUrl: string;
+  birthday: number;
+  city: number;
+  defaultAvatar: boolean;
+  description: string;
+  detailDescription: string;
+  djStatus: number;
+  experts: null;
+  expertTags: null;
+  followed: boolean;
+  gender: number;
+  mutual: boolean;
+  nickname: string;
+  province: number;
+  remarkName: null;
+  signature: string;
+  userId: number;
+  userType: number;
+  vipType: number;
+}
+
+export interface Subscriber {
+  accountStatus: number;
+  anchor: boolean;
+  authenticationTypes: number;
+  authority: number;
+  authStatus: number;
+  avatarDetail: null;
+  avatarImgId: number;
+  subscriberAvatarImgIdStr: string;
+  avatarImgIdStr: string;
+  avatarUrl: string;
+  backgroundImgId: number;
+  backgroundImgIdStr: string;
+  backgroundUrl: string;
+  birthday: number;
+  city: number;
+  defaultAvatar: boolean;
+  description: string;
+  detailDescription: string;
+  djStatus: number;
+  experts: null;
+  expertTags: null;
+  followed: boolean;
+  gender: number;
+  mutual: boolean;
+  nickname: string;
+  province: number;
+  remarkName: null;
+  signature: string;
+  userId: number;
+  userType: number;
+  vipType: number;
+}
+
+export interface TrackId {
+  alg: null;
+  at: number;
+  f: null;
+  id: number;
+  rcmdReason: string;
+  sc: null;
+  sr: null;
+  t: number;
+  uid: number;
+  v: number;
+}
+
+export interface Track {
+  a: null;
+  al: Al1;
+  alia: string[];
+  ar: Ar[];
+  awardTags: null;
+  cd: string;
+  cf: string;
+  copyright: number;
+  cp: number;
+  crbt: null;
+  djId: number;
+  dt: number;
+  entertainmentTags: null;
+  fee: number;
+  ftype: number;
+  h: null | H;
+  hr: null | Hr;
+  id: number;
+  l: L;
+  m: null | M;
+  mark: number;
+  mst: number;
+  mv: number;
+  name: string;
+  no: number;
+  noCopyrightRcmd: null | NoCopyrightRcmd;
+  originCoverType: number;
+  originSongSimpleData: null | OriginSongSimpleData;
+  pop: number;
+  pst: number;
+  publishTime: number;
+  resourceState: boolean;
+  rt: null | string;
+  rtUrl: null;
+  rtUrls: string[];
+  rtype: number;
+  rurl: null;
+  sid: number;
+  single: number;
+  songJumpInfo: null;
+  sq: null | Sq;
+  st: number;
+  t: number;
+  tagPicList: null;
+  tns: string[];
+  v: number;
+  version: number;
+  videoInfo: VideoInfo;
+}
+
+export interface Al1 {
+  id: number;
+  name: string;
+  pic: number;
+  picStr?: string;
+  picUrl: string;
+  tns: string[];
+}
+
+export interface Ar {
+  alias: string[];
+  id: number;
+  name: string;
+  tns: string[];
+}
+
+export interface H {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface Hr {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface L {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface M {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface NoCopyrightRcmd {
+  expInfo: null;
+  songId: null;
+  thirdPartySong: null;
+  type: number;
+  typeDesc: string;
+}
+
+export interface OriginSongSimpleData {
+  albumMeta: AlbumMeta;
+  artists: Artist[];
+  name: string;
+  songId: number;
+}
+
+export interface AlbumMeta {
+  id: number;
+  name: string;
+}
+
+export interface Artist {
+  id: number;
+  name: string;
+}
+
+export interface Sq {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface VideoInfo {
+  moreThanOne: boolean;
+  video: null | Video;
+}
+
+export interface Video {
+  alias: null;
+  artists: null;
+  coverUrl: string;
+  playTime: number;
+  publishTime: number;
+  title: string;
+  type: number;
+  vid: string;
+}
+
+export interface Privilege2 {
+  chargeInfoList: ChargeInfoList[];
+  cp: number;
+  cs: boolean;
+  dl: number;
+  dlLevel: string;
+  downloadMaxbr: number;
+  downloadMaxBrLevel: string;
+  fee: number;
+  fl: number;
+  flag: number;
+  flLevel: string;
+  freeTrialPrivilege: FreeTrialPrivilege;
+  id: number;
+  maxbr: number;
+  maxBrLevel: string;
+  paidBigBang: boolean;
+  payed: number;
+  pc: null;
+  pl: number;
+  playMaxbr: number;
+  playMaxBrLevel: string;
+  plLevel: string;
+  preSell: boolean;
+  realPayed: number;
+  rightSource: number;
+  rscl: number | null;
+  sp: number;
+  st: number;
+  subp: number;
+  toast: boolean;
+}
+
+export interface ChargeInfoList {
+  chargeMessage: null;
+  chargeType: number;
+  chargeUrl: null;
+  rate: number;
+}
+
+export interface FreeTrialPrivilege {
+  cannotListenReason: number | null;
+  listenType: null;
+  resConsumable: boolean;
+  userConsumable: boolean;
 }

@@ -41,11 +41,11 @@ instance.interceptors.response.use(
 );
 
 const api = {
-  async get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  async get<T>(url: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
     return instance.get<T>(url, config);
   },
 
-  async post<T>(url: string, data: T, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  async post<T>(url: string, data: T, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
     return instance.post<T>(url, data, config);
   }
 };

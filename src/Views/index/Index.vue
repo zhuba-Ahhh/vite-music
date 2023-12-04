@@ -1,44 +1,45 @@
 <template>
     <div class="home">
+        <!-- 轮播 -->
         <Banners />
-
+        <!-- 热门推荐 -->
         <div class="hot-list">
             <div class="h_title">
                 <h3>热门推荐</h3>
-                <!-- <span v-for="(item, index) in playlist_tags" :key="item.id" :class="index == playlist_index ? 'active' : ''"
-                    @click="choosePlayListType(index)">{{ item.name }}</span> -->
+                <span v-for="(item, index) in playlist_tags" :key="item.id" :class="index == playlist_index ? 'active' : ''"
+                    @click="choosePlayListType(index)">{{ item.name }}</span>
             </div>
             <div class="wrapper">
-                <!-- <play-list :playList="playlist_list" :loading="playlist_loading" :num="playlist_count"></play-list> -->
+                <play-list :playList="playlist_list" :loading="playlist_loading" :num="playlist_count"></play-list>
             </div>
         </div>
-
+        <!-- 新碟上架 -->
         <div class='album_list'>
             <div class="h_title">
                 <h3>新碟上架</h3>
-                <!-- <span v-for="(item, index) in album_area" :key="item.id" :class="index == album_index ? 'active' : ''"
-                    @click="chooseAlbumType(index)">{{ item.name }}</span> -->
+                <span v-for="(item, index) in album_area" :key="uuid()" :class="index == album_index ? 'active' : ''"
+                    @click="chooseAlbumType(index)">{{ item.name }}</span>
             </div>
             <div class="wrapper">
-                <!-- <album-list :albumList="album_list" :loading="album_loading" :num="album_count"></album-list> -->
+                <album-list :albumList="album_list" :loading="album_loading" :num="album_count"></album-list>
             </div>
         </div>
 
         <div class='top_list'>
             <rank-list />
         </div>
-
+        <!-- 最新MV -->
         <div class='mv_list'>
             <div class="h_title">
                 <h3>最新MV</h3>
-                <!-- <span v-for="(item, index) in mv_area" :key="item.id" :class="index == mv_index ? 'active' : ''"
-                    @click="chooseMvType(index)">{{ item }}</span> -->
+                <span v-for="(item, index) in mv_area" :key="uuid()" :class="index == mv_index ? 'active' : ''"
+                    @click="chooseMvType(index)">{{ item }}</span>
             </div>
             <div class="wrapper">
-                <!-- <mv-list :mvList="mv_list" :loading="mv_loading" :num="mv_count"></mv-list> -->
+                <mv-list :mvList="mv_list" :loading="mv_loading" :num="mv_count"></mv-list>
             </div>
         </div>
-
+        <!-- 热门电台 热门歌手 -->
         <div class="dj-artist">
             <div class="dj-list">
                 <div class="h_title">
@@ -57,26 +58,33 @@
 </template>
 
 <script setup lang="ts">
+import { toRefs } from 'vue';
+import { uuid } from '../../utils';
 import Banners from './Banner.vue';
 import ArtistList from './ArtistList.vue';
+import RankList from './RankList.vue';
 import DjList from './DjList.vue';
-// import RankList from '@views/index/RankList.vue'
-// import PlayList from '@components/PlayList.vue';
-// import AlbumList from '@components/AlbumList.vue';
-// import MvList from '@components/MvList.vue';
-// import DjList from '@views/index/DjList.vue'
-
-
-// import { hot_recom, new_album, new_mv } from '../../hooks';
+import PlayList from '../../components/PlayList.vue';
+import AlbumList from '../../components/AlbumList.vue';
+import MvList from '../../components/MvList.vue';
+import { useHotRecom, new_album, new_mv } from '../../hooks';
 
 // -------------- 推荐歌单
-// const { playlist_info, choosePlayListType } = hot_recom();
+const { playlist_tags, playlist_index, playlist_list, playlist_loading, playlist_count, choosePlayListType } = useHotRecom();
+console.log(`( playlist_tags )===============>`, playlist_tags);
+console.log(`( playlist_index )===============>`, playlist_index);
+console.log(`( playlist_list )===============>`, playlist_list, playlist_list.value);
+console.log(`( playlist_loading )===============>`, playlist_loading, playlist_loading.value);
+console.log(`( playlist_count )===============>`, playlist_count);
 
-// // -------------- 新碟
-// const { album_info, chooseAlbumType } = new_album();
 
-// // -------------- MV
-// const { mv_info, chooseMvType } = new_mv();
+// -------------- 新碟
+const { album_info, chooseAlbumType } = new_album();
+const { album_area, album_list, album_index, album_loading, album_count } = toRefs(album_info);
+
+// -------------- MV
+const { mv_info, chooseMvType } = new_mv();
+const { mv_area, mv_index, mv_list, mv_loading, mv_count } = toRefs(mv_info);
 
 </script>
 <style lang="less" scoped>

@@ -91,7 +91,6 @@ onMounted(() => {
 <style lang="less" scoped>
 @import url('../../styles/main.less');
 // 轮播图的宽度
-@mainWidth: calc(~"100vw - 270px - 20px - 20px");
 
 .calcHeight(@w, @ow, @oh) {
     height: calc(@w * @oh / @ow);

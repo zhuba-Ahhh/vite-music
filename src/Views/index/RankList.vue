@@ -1,16 +1,11 @@
 <template>
-    <el-skeleton
-        :loading="loading"
-        animated
-        :throttle="500"
-        :count="4"
-        >
+    <el-skeleton :loading="loading" animated :throttle="500" :count="4">
         <template #template>
             <div class="ske-item">
                 <el-skeleton-item class="ske-h4" variant="text" />
                 <el-skeleton-item class="ske-h5" variant="text" />
                 <div class="toplist_wrapper">
-                    <div class="songitem" v-for="item in num">
+                    <div class="songitem" v-for="item in num" :key="uuid() + item">
                         <el-skeleton-item class="ske-img" variant="image" />
                         <div class="songinfo">
                             <el-skeleton-item class="ske-title" variant="text" />
@@ -24,22 +19,28 @@
             <div class="wrapper">
                 <div v-for="item in top_list" :key="item.id" class="toplist_item">
                     <div class="toplist_hd">
-                        <router-link :to="{ path: '/rank', query: { rId: item.id, type: 'Top' }}" class="toplist_name">{{item.name}}</router-link>
-                        <h5 class="toplist_update">最近更新：{{$utils.formartDate(item.updateTime, 'MM月dd日')}}<span>（{{item.updateFrequency}}）</span></h5>
+                        <router-link :to="{ path: '/rank', query: { rId: item.id, type: 'Top' } }" class="toplist_name">{{
+                            item.name }}</router-link>
+                        <h5 class="toplist_update">最近更新：{{ formartDate(item.updateTime,
+                            'MM月dd日') }}<span>（{{ item.updateFrequency }}）</span></h5>
                     </div>
                     <div class="toplist_wrapper">
-                        <div class="songitem" :class="{active: (songItem.vip || songItem.license)}" v-for="(songItem, index) in songList[item.id]" :key="songItem.id">
+                        <div class="songitem" :class="{ active: (songItem.vip || songItem.license) }"
+                            v-for="(songItem) in songList[item.id]" :key="songItem.id">
                             <div class="songimg">
                                 <el-image :src="songItem.album.picUrl + '?param=120y120'">
-                                <div slot="placeholder" class="image-slot">
-                                    <i class="iconfont icon-placeholder"></i>
-                                </div>
-                            </el-image>
+                                    <div slot="placeholder" class="image-slot">
+                                        <i class="iconfont icon-placeholder"></i>
+                                    </div>
+                                </el-image>
                             </div>
                             <div class="songinfo">
-                                <router-link :to="{ path: '/song', query: { id: songItem.id }}" class="song_title">{{songItem.name}}</router-link>
+                                <router-link :to="{ path: '/song', query: { id: songItem.id } }" class="song_title">{{
+                                    songItem.name }}</router-link>
                                 <div class="song_author">
-                                    <router-link :to="{ path: '/singer', query: { id: author.id }}" class="song_name" v-for="(author, k) in songItem.singer" :key="k">{{ k !== 0 ? '/ ' + author.name : author.name }}</router-link>
+                                    <router-link :to="{ path: '/singer', query: { id: author.id } }" class="song_name"
+                                        v-for="(author, k) in songItem.singer" :key="k">{{ k !== 0 ? '/ ' + author.name :
+                                            author.name }}</router-link>
                                 </div>
                             </div>
                             <div class="songoperate" v-if="!songItem.vip && !songItem.license">
@@ -53,53 +54,47 @@
         </template>
     </el-skeleton>
 </template>
-<script>
-import { getCurrentInstance, onMounted, reactive, toRefs } from 'vue';
-import { useStore } from 'vuex';
-export default {
-    setup() {
-        const { proxy } = getCurrentInstance();
-        const store = useStore();
-        const info = reactive({
-            top_list: [],
-            songList: {},
-            num: 6,
-            loading: true
-        });
+<script setup lang="ts">
+import { onMounted, reactive, ref } from 'vue';
+import { toplist, topRankList, List } from '../../apis'
+import { Song } from '../../types'
+import { ElMessage } from 'element-plus';
+import { formatSongs, formartDate, uuid } from '../../utils';
 
-        const getToplist = async() => {
-            const { data: res } = await proxy.$http.toplist()
+const num = ref(6);
+const loading = ref(true);
+let top_list: List[] = reactive([]);
+let songList: Song[] = ([]);
 
-            if (res.code !== 200) {
-                return proxy.$msg.error('数据请求失败')
-            }
+const getToplist = async () => {
+    const { data } = await toplist();
+    const { code, list, } = data
 
-            info['top_list'] = res.list.splice(0, 4)
-            info['top_list'].forEach(async item => {
-                const { data: res } = await proxy.$http.topRankList({ id: item.id })
-
-                info['songList'][item.id] = proxy.$utils.formatSongs(res.playlist.tracks.splice(0, info.num), res.privileges.splice(0, info.num));
-            });
-
-            info['loading'] = false;
-        };
-
-        // 添加当前歌曲到播放列表
-        const addSongList = (item) => {
-            store.dispatch('addList', { list: [item] });
-            store.commit('SET_PLAYLISTTIPS', true);
-        };
-
-        onMounted(() => {
-            getToplist();
-        })
-
-        return {
-            ...toRefs(info),
-            addSongList
-        }
+    if (code !== 200) {
+        return ElMessage.error('数据请求失败')
     }
-}
+
+    top_list = list.splice(0, 4)
+    top_list.forEach(async item => {
+        const { data } = await topRankList({ id: String(item.id) });
+        const { playlist, privileges } = data;
+
+        songList[item.id] = formatSongs(playlist.tracks.splice(0, num.value), privileges.splice(0, num.value));
+    });
+
+    loading.value = false;
+};
+
+// 添加当前歌曲到播放列表
+const addSongList = () => {
+    // store.dispatch('addList', { list: [item] });
+    // store.commit('SET_PLAYLISTTIPS', true);
+};
+
+onMounted(() => {
+    getToplist();
+})
+
 </script>
 <style lang="less" scoped>
 .wrapper {
@@ -107,6 +102,7 @@ export default {
     justify-content: space-between;
     margin: 0 -10px;
 }
+
 .toplist_item {
     position: relative;
     padding: 20px;
@@ -144,7 +140,7 @@ export default {
         }
 
         .songimg {
-            flex-shrink:0;
+            flex-shrink: 0;
             overflow: hidden;
             width: 48px;
             height: 48px;
@@ -253,7 +249,7 @@ export default {
     }
 
     .ske-img {
-        flex-shrink:0;
+        flex-shrink: 0;
         overflow: hidden;
         width: 48px;
         height: 48px;
@@ -270,6 +266,7 @@ export default {
         height: 24px;
         margin-bottom: 5px;
     }
+
     .ske-author {
         width: 40%;
         height: 20px;

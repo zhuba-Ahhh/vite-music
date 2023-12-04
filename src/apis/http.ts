@@ -9,7 +9,10 @@ import {
   GetUserInfoResult,
   BannerResult,
   TopArtistsResult,
-  GetHotDjResult
+  GetHotDjResult,
+  AlbumResult,
+  ToplistResponse,
+  TopRankListResponse
 } from './types';
 
 // 创建通用响应类型
@@ -104,7 +107,7 @@ const checkSong = ({ id = '' }) => {
 
 /* ********* 歌单 ********* */
 // 热门歌单分类
-const hotList = (): Promise<AxiosResponse<CommonResponse<HotListResult>>> => {
+const hotList = (): Promise<AxiosResponse<HotListResult>> => {
   return api.get('/playlist/hot', {});
 };
 // 歌单列表
@@ -119,7 +122,7 @@ const playList = ({
   cat = '',
   limit = 50,
   offset = 0
-}: PlayListParams): Promise<AxiosResponse<CommonResponse<PlayListResult>>> => {
+}: PlayListParams): Promise<AxiosResponse<PlayListResult>> => {
   return api.get(`/top/playlist?limit=${limit}&order=${order}&cat=${cat}&offset=${offset}`, {});
 };
 // 推荐歌单
@@ -230,7 +233,7 @@ const commentLike = ({ id = '', cid = '', t = 1, type = 0 }) => {
 
 /* ********* 专辑 ********* */
 // 获取专辑内容
-const album = ({ id = '' }) => {
+const album = ({ id = '' }: { id: string }): Promise<AxiosResponse<AlbumResult>> => {
   return api.get(`/album?id=${id}`, {});
 };
 const albumDynamic = ({ id = '' }) => {
@@ -338,11 +341,15 @@ const simiMv = ({ id = '' }) => {
 
 /* ********* 排行榜 ********* */
 // 排行榜
-const toplist = () => {
+const toplist = (): Promise<AxiosResponse<ToplistResponse>> => {
   return api.get('/toplist', {});
 };
 // 排行榜歌单列表
-const topRankList = ({ id = '', s = 8 }) => {
+export interface TopRankListParams {
+  id?: string;
+  s?: number;
+}
+const topRankList = ({ id = '', s = 8 }): Promise<AxiosResponse<TopRankListResponse>> => {
   return api.get(`/playlist/detail?id=${id}&s=${s}`, {});
 };
 // 所有榜单内容摘要

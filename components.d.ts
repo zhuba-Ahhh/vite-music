@@ -7,6 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AlbumList: typeof import('./src/components/AlbumList.vue')['default']
+    ArtistItem: typeof import('./src/components/components/ArtistItem.vue')['default']
+    AudioBox: typeof import('./src/components/components/PlayBarTmp/AudioBox.vue')['default']
+    Bar: typeof import('./src/components/components/PlayBarTmp/Bar.vue')['default']
+    Comments: typeof import('./src/components/components/Comments.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: (typeof import('element-plus/es'))['ElButton']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -19,11 +24,21 @@ declare module 'vue' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
+    Empty: typeof import('./src/components/components/Empty.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
+    Loading: typeof import('./src/components/components/Loading.vue')['default']
     Login: typeof import('./src/components/Login.vue')['default']
+    Lyrics: typeof import('./src/components/components/Lyrics.vue')['default']
+    MiniBar: typeof import('./src/components/components/PlayBarTmp/MiniBar.vue')['default']
+    MvList: typeof import('./src/components/MvList.vue')['default']
+    PlayBar: typeof import('./src/components/components/PlayBarTmp/PlayBar.vue')['default']
+    PlayList: typeof import('./src/components/PlayList.vue')['default']
+    ProgressLine: typeof import('./src/components/components/ProgressLine.vue')['default']
+    Reply: typeof import('./src/components/components/Reply.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/Search.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
+    SongList: typeof import('./src/components/components/SongList.vue')['default']
   }
 }

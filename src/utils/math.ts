@@ -1,5 +1,5 @@
 /**
- *
+ * @description 分割数组,生成新嵌套数组
  * @param arr
  * @param chunkSize
  * @returns
@@ -19,7 +19,7 @@ export const chunkArray = <T>(arr: T[], chunkSize: number): T[][] => {
 };
 
 /**
- *
+ * @description 随机生成id(字符型)
  * @param len 长度
  * @param pre 前缀
  * @returns uuid

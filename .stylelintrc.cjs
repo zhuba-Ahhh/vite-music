@@ -4,7 +4,7 @@ module.exports = {
   // 不同格式的文件指定自定义语法
   overrides: [
     {
-      files: ['**/*.(less|css|vue|html)'],
+      files: ['**/*.(less|css|html)'],
       customSyntax: 'postcss-less'
     },
     {
@@ -26,7 +26,7 @@ module.exports = {
     'selector-pseudo-element-no-unknown': [
       true,
       {
-        ignorePseudoElements: ['v-deep']
+        ignorePseudoElements: ['v-deep', ':deep']
       }
     ],
     'selector-pseudo-class-no-unknown': [
