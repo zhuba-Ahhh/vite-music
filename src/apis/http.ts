@@ -12,7 +12,12 @@ import {
   GetHotDjResult,
   AlbumResult,
   ToplistResponse,
-  TopRankListResponse
+  TopRankListResponse,
+  TopListDetailResponse,
+  ListDetailResponse,
+  AlbumDynamicResponse,
+  ArtistAlbumResponse,
+  PlaylistSCollectResponse
 } from './types';
 
 // 创建通用响应类型
@@ -146,7 +151,16 @@ const playlistdetail = ({ id = '', s = 8 }) => {
   return api.get(`/playlist/detail?id=${id}&s=${s}`, {});
 };
 // 歌单收藏用户
-const playlistSCollect = ({ id = '', limit = 20, offset = 0 }) => {
+export interface playlistSCollectParams {
+  id?: string | number;
+  limit?: number;
+  offset?: number;
+}
+const playlistSCollect = ({
+  id = '',
+  limit = 20,
+  offset = 0
+}: playlistSCollectParams): Promise<AxiosResponse<PlaylistSCollectResponse>> => {
   return api.get(`/playlist/subscribers?id=${id}&limit=${limit}&offset=${offset}`, {});
 };
 // 相关歌单推荐
@@ -236,10 +250,20 @@ const commentLike = ({ id = '', cid = '', t = 1, type = 0 }) => {
 const album = ({ id = '' }: { id: string }): Promise<AxiosResponse<AlbumResult>> => {
   return api.get(`/album?id=${id}`, {});
 };
-const albumDynamic = ({ id = '' }) => {
+const albumDynamic = ({
+  id = ''
+}: {
+  id: string | number;
+}): Promise<AxiosResponse<AlbumDynamicResponse>> => {
   return api.get(`/album/detail/dynamic?id=${id}`, {});
 };
-const albumSub = ({ id = '', t = 1 }) => {
+const albumSub = ({
+  id = '',
+  t = 1
+}: {
+  id?: string;
+  t?: number;
+}): Promise<AxiosResponse<CommonResponse<any>>> => {
   return api.get(`/album/sub?id=${id}&t=${t}`, {});
 };
 // 专辑评论
@@ -264,7 +288,16 @@ const artistSub = ({ id = '', t = '1' }) => {
   return api.get(`/artist/sub?id=${id}&t=${t}`, {});
 };
 // 获取歌手专辑
-const artistAlbum = ({ id = '', limit = 50, offset = 0 }) => {
+export interface artistAlbumParams {
+  id?: number;
+  limit?: number;
+  offset?: number;
+}
+const artistAlbum = ({
+  id = undefined,
+  limit = 50,
+  offset = 0
+}: artistAlbumParams): Promise<AxiosResponse<ArtistAlbumResponse>> => {
   return api.get(`/artist/album?id=${id}&limit=${limit}&offset=${offset}`, {});
 };
 // 获取歌手 mv
@@ -353,11 +386,15 @@ const topRankList = ({ id = '', s = 8 }): Promise<AxiosResponse<TopRankListRespo
   return api.get(`/playlist/detail?id=${id}&s=${s}`, {});
 };
 // 所有榜单内容摘要
-const topListDetail = () => {
+const topListDetail = (): Promise<AxiosResponse<TopListDetailResponse>> => {
   return api.get('/toplist/detail', {});
 };
 // 歌单详情
-const listDetail = ({ id = '', s = 8 }) => {
+export interface ListDetailParams {
+  idL: string;
+  s: number;
+}
+const listDetail = ({ id = '', s = 8 }): Promise<AxiosResponse<ListDetailResponse>> => {
   return api.get(`/playlist/detail?id=${id}&s=${s}`, {});
 };
 

@@ -71,12 +71,12 @@ import { useHotRecom, new_album, new_mv } from '../../hooks';
 
 // -------------- 推荐歌单
 const { playlist_tags, playlist_index, playlist_list, playlist_loading, playlist_count, choosePlayListType } = useHotRecom();
+
 console.log(`( playlist_tags )===============>`, playlist_tags);
 console.log(`( playlist_index )===============>`, playlist_index);
-console.log(`( playlist_list )===============>`, playlist_list, playlist_list.value);
+console.log(`( playlist_list )===============>`, playlist_list, playlist_list);
 console.log(`( playlist_loading )===============>`, playlist_loading, playlist_loading.value);
 console.log(`( playlist_count )===============>`, playlist_count);
-
 
 // -------------- 新碟
 const { album_info, chooseAlbumType } = new_album();

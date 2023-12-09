@@ -1035,7 +1035,7 @@ export interface Playlist2 {
   status: number;
   subscribed: null;
   subscribedCount: number;
-  subscribers: Subscriber[];
+  subscribers: Subscriber1[];
   tags: string[];
   titleImage: number;
   titleImageUrl: null;
@@ -1086,7 +1086,7 @@ export interface Creator2 {
   vipType: number;
 }
 
-export interface Subscriber {
+export interface Subscriber1 {
   accountStatus: number;
   anchor: boolean;
   authenticationTypes: number;
@@ -1321,4 +1321,759 @@ export interface FreeTrialPrivilege {
   listenType: null;
   resConsumable: boolean;
   userConsumable: boolean;
+}
+
+export interface TopListDetailResponse {
+  artistToplist: ArtistToplist;
+  code: number;
+  list: List1[];
+  rewardToplist: RewardToplist;
+}
+
+export interface ArtistToplist {
+  artists: ArtistToplistArtist[];
+  coverUrl: string;
+  name: string;
+  position: number;
+  upateFrequency: string;
+  updateFrequency: string;
+}
+
+export interface ArtistToplistArtist {
+  first: string;
+  second: string;
+  third: number;
+}
+
+export interface List1 {
+  adType: number;
+  anonimous: boolean;
+  artists: null;
+  backgroundCoverId: number;
+  backgroundCoverUrl: null;
+  cloudTrackCount: number;
+  commentThreadId: string;
+  coverImageUrl: null;
+  coverImgId: number;
+  coverImgIdStr: string;
+  coverImgUrl: string;
+  coverText: null;
+  createTime: number;
+  creator: null;
+  description: null | string;
+  englishTitle: null;
+  highQuality: boolean;
+  iconImageUrl: null;
+  id: number;
+  name: string;
+  newImported: boolean;
+  opRecommend: boolean;
+  ordered: boolean;
+  playCount: number;
+  privacy: number;
+  recommendInfo: null;
+  socialPlaylistCover: null;
+  specialType: number;
+  status: number;
+  subscribed: null;
+  subscribedCount: number;
+  subscribers: string[];
+  tags: string[];
+  titleImage: number;
+  titleImageUrl: null;
+  toplistType: string;
+  totalDuration: number;
+  trackCount: number;
+  trackNumberUpdateTime: number;
+  tracks: Track1[];
+  trackUpdateTime: number;
+  tsSongCount: number;
+  updateFrequency: string;
+  updateTime: number;
+  userId: number;
+}
+
+export interface Track1 {
+  first: string;
+  second: string;
+}
+
+export interface RewardToplist {
+  coverUrl: string;
+  name: string;
+  position: number;
+  songs: Song[];
+}
+
+export interface Song3 {
+  album: Album;
+  alias: string[];
+  artists: SongArtist1[];
+  audition: null;
+  bMusic: BMusic;
+  commentThreadId: string;
+  copyFrom: string;
+  copyright: number;
+  copyrightId: number;
+  crbt: null;
+  dayPlays: number;
+  disc: string;
+  duration: number;
+  fee: number;
+  ftype: number;
+  hearTime: number;
+  hMusic: HMusic;
+  hrMusic: null;
+  id: number;
+  lMusic: LMusic;
+  mark: number;
+  mMusic: MMusic;
+  mp3Url: null;
+  mvid: number;
+  name: string;
+  no: number;
+  noCopyrightRcmd: null;
+  originCoverType: number;
+  originSongSimpleData: null;
+  playedNum: number;
+  popularity: number;
+  position: number;
+  ringtone: string;
+  rtUrl: null;
+  rtUrls: string[];
+  rtype: number;
+  rurl: null;
+  score: number;
+  sign: null;
+  single: number;
+  sqMusic: SqMusic;
+  starred: boolean;
+  starredNum: number;
+  status: number;
+  transName: null;
+}
+
+export interface Album {
+  alias: string[];
+  artist: PurpleArtist2;
+  artists: FluffyArtist1[];
+  blurPicUrl: string;
+  briefDesc: string;
+  commentThreadId: string;
+  company: null | string;
+  companyId: number;
+  copyrightId: number;
+  description: string;
+  dolbyMark: number;
+  gapless: number;
+  id: number;
+  mark: number;
+  name: string;
+  onSale: boolean;
+  pic: number;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  publishTime: number;
+  size: number;
+  songs: string[];
+  status: number;
+  subType: string;
+  tags: string;
+  transName: null;
+  type: string;
+}
+
+export interface PurpleArtist2 {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  id: number;
+  img1V1Id: number;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface FluffyArtist1 {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  id: number;
+  img1V1Id: number;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface SongArtist1 {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  id: number;
+  img1V1Id: number;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface BMusic {
+  bitrate: number;
+  dfsId: number;
+  extension: string;
+  id: number;
+  name: null;
+  playTime: number;
+  size: number;
+  sr: number;
+  volumeDelta: number;
+}
+
+export interface HMusic {
+  bitrate: number;
+  dfsId: number;
+  extension: string;
+  id: number;
+  name: null;
+  playTime: number;
+  size: number;
+  sr: number;
+  volumeDelta: number;
+}
+
+export interface LMusic {
+  bitrate: number;
+  dfsId: number;
+  extension: string;
+  id: number;
+  name: null;
+  playTime: number;
+  size: number;
+  sr: number;
+  volumeDelta: number;
+}
+
+export interface MMusic {
+  bitrate: number;
+  dfsId: number;
+  extension: string;
+  id: number;
+  name: null;
+  playTime: number;
+  size: number;
+  sr: number;
+  volumeDelta: number;
+}
+
+export interface SqMusic {
+  bitrate: number;
+  dfsId: number;
+  extension: string;
+  id: number;
+  name: null;
+  playTime: number;
+  size: number;
+  sr: number;
+  volumeDelta: number;
+}
+
+export interface ListDetailResponse {
+  code: number;
+  fromUserCount: number;
+  fromUsers: null;
+  playlist: Playlist2;
+  privileges: Privilege1[];
+  relatedVideos: { [key: string]: any };
+  resEntrance: null;
+  sharedPrivilege: null;
+  songFromUsers: null;
+  urls: null;
+}
+
+export interface Playlist2 {
+  adType: number;
+  algTags: null;
+  backgroundCoverId: number;
+  backgroundCoverUrl: null;
+  bannedTrackIds: null;
+  cloudTrackCount: number;
+  commentCount: number;
+  commentThreadId: string;
+  copied: boolean;
+  coverImgId: number;
+  coverImgIdStr: string;
+  coverImgUrl: string;
+  createTime: number;
+  creator: Creator3;
+  description: string;
+  englishTitle: null;
+  gradeStatus: string;
+  highQuality: boolean;
+  historySharedUsers: null;
+  id: number;
+  mvResourceInfos: null;
+  name: string;
+  newImported: boolean;
+  officialPlaylistType: null;
+  opRecommend: boolean;
+  ordered: boolean;
+  playCount: number;
+  privacy: number;
+  relateResType: null;
+  remixVideo: null;
+  score: null;
+  shareCount: number;
+  sharedUsers: null;
+  specialType: number;
+  status: number;
+  subscribed: null;
+  subscribedCount: number;
+  subscribers: Subscriber2[];
+  tags: string[];
+  titleImage: number;
+  titleImageUrl: null;
+  trackCount: number;
+  trackIds: TrackId[];
+  trackNumberUpdateTime: number;
+  tracks: Track[];
+  trackUpdateTime: number;
+  trialMode: number;
+  updateFrequency: null;
+  updateTime: number;
+  userId: number;
+  videoIds: null;
+  videos: null;
+}
+
+export interface Creator3 {
+  accountStatus: number;
+  anchor: boolean;
+  authenticationTypes: number;
+  authority: number;
+  authStatus: number;
+  avatarDetail: null;
+  avatarImgId: number;
+  creatorAvatarImgIdStr: string;
+  avatarImgIdStr: string;
+  avatarUrl: string;
+  backgroundImgId: number;
+  backgroundImgIdStr: string;
+  backgroundUrl: string;
+  birthday: number;
+  city: number;
+  defaultAvatar: boolean;
+  description: string;
+  detailDescription: string;
+  djStatus: number;
+  experts: null;
+  expertTags: null;
+  followed: boolean;
+  gender: number;
+  mutual: boolean;
+  nickname: string;
+  province: number;
+  remarkName: null;
+  signature: string;
+  userId: number;
+  userType: number;
+  vipType: number;
+}
+
+export interface Subscriber2 {
+  accountStatus: number;
+  anchor: boolean;
+  authenticationTypes: number;
+  authority: number;
+  authStatus: number;
+  avatarDetail: null;
+  avatarImgId: number;
+  subscriberAvatarImgIdStr: string;
+  avatarImgIdStr: string;
+  avatarUrl: string;
+  backgroundImgId: number;
+  backgroundImgIdStr: string;
+  backgroundUrl: string;
+  birthday: number;
+  city: number;
+  defaultAvatar: boolean;
+  description: string;
+  detailDescription: string;
+  djStatus: number;
+  experts: null;
+  expertTags: null;
+  followed: boolean;
+  gender: number;
+  mutual: boolean;
+  nickname: string;
+  province: number;
+  remarkName: null;
+  signature: string;
+  userId: number;
+  userType: number;
+  vipType: number;
+}
+
+export interface TrackId {
+  alg: null;
+  at: number;
+  f: null;
+  id: number;
+  rcmdReason: string;
+  sc: null;
+  sr: null;
+  t: number;
+  uid: number;
+  v: number;
+}
+
+export interface Track {
+  a: null;
+  al: Al1;
+  alia: string[];
+  ar: Ar[];
+  awardTags: null;
+  cd: string;
+  cf: string;
+  copyright: number;
+  cp: number;
+  crbt: null;
+  djId: number;
+  dt: number;
+  entertainmentTags: null;
+  fee: number;
+  ftype: number;
+  h: null | H;
+  hr: null | Hr;
+  id: number;
+  l: L;
+  m: null | M;
+  mark: number;
+  mst: number;
+  mv: number;
+  name: string;
+  no: number;
+  noCopyrightRcmd: null | NoCopyrightRcmd;
+  originCoverType: number;
+  originSongSimpleData: null | OriginSongSimpleData;
+  pop: number;
+  pst: number;
+  publishTime: number;
+  resourceState: boolean;
+  rt: null | string;
+  rtUrl: null;
+  rtUrls: string[];
+  rtype: number;
+  rurl: null;
+  sid: number;
+  single: number;
+  songJumpInfo: null;
+  sq: null | Sq;
+  st: number;
+  t: number;
+  tagPicList: null;
+  tns: string[];
+  v: number;
+  version: number;
+  videoInfo: VideoInfo;
+}
+
+export interface Al1 {
+  id: number;
+  name: string;
+  pic: number;
+  picStr?: string;
+  picUrl: string;
+  tns: string[];
+}
+
+export interface Ar {
+  alias: string[];
+  id: number;
+  name: string;
+  tns: string[];
+}
+
+export interface H {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface Hr {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface L {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface M {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface NoCopyrightRcmd {
+  expInfo: null;
+  songId: null;
+  thirdPartySong: null;
+  type: number;
+  typeDesc: string;
+}
+
+export interface OriginSongSimpleData {
+  albumMeta: AlbumMeta;
+  artists: Artist[];
+  name: string;
+  songId: number;
+}
+
+export interface AlbumMeta {
+  id: number;
+  name: string;
+}
+
+export interface Artist {
+  id: number;
+  name: string;
+}
+
+export interface Sq {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+export interface VideoInfo {
+  moreThanOne: boolean;
+  video: null | Video;
+}
+
+export interface Video {
+  alias: null;
+  artists: null;
+  coverUrl: string;
+  playTime: number;
+  publishTime: number;
+  title: string;
+  type: number;
+  vid: string;
+}
+
+export interface Privilege1 {
+  chargeInfoList: ChargeInfoList[];
+  cp: number;
+  cs: boolean;
+  dl: number;
+  dlLevel: string;
+  downloadMaxbr: number;
+  downloadMaxBrLevel: string;
+  fee: number;
+  fl: number;
+  flag: number;
+  flLevel: string;
+  freeTrialPrivilege: FreeTrialPrivilege;
+  id: number;
+  maxbr: number;
+  maxBrLevel: string;
+  paidBigBang: boolean;
+  payed: number;
+  pc: null;
+  pl: number;
+  playMaxbr: number;
+  playMaxBrLevel: string;
+  plLevel: string;
+  preSell: boolean;
+  realPayed: number;
+  rightSource: number;
+  rscl: number | null;
+  sp: number;
+  st: number;
+  subp: number;
+  toast: boolean;
+}
+
+export interface ChargeInfoList {
+  chargeMessage: null;
+  chargeType: number;
+  chargeUrl: null;
+  rate: number;
+}
+
+export interface FreeTrialPrivilege {
+  cannotListenReason: number | null;
+  listenType: null;
+  resConsumable: boolean;
+  userConsumable: boolean;
+}
+
+export interface AlbumDynamicResponse {
+  albumGameInfo: null;
+  code: number;
+  commentCount: number;
+  isSub?: boolean | number;
+  likedCount: number;
+  onSale: boolean;
+  shareCount: number;
+  subCount: number;
+  subTime: number;
+}
+
+export interface ArtistAlbumResponse {
+  artist: ResponseArtist;
+  code: number;
+  hotAlbums: HotAlbum[];
+  more: boolean;
+}
+
+export interface ResponseArtist {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  followed: boolean;
+  id: number;
+  img1V1Id: number;
+  img1V1IdStr: string;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface HotAlbum {
+  alias: string[];
+  artist: PurpleArtist1;
+  artists: ArtistElement[];
+  awardTags: null;
+  blurPicUrl: string;
+  briefDesc: string;
+  commentThreadId: string;
+  company: string;
+  companyId: number;
+  copyrightId: number;
+  description: string;
+  id: number;
+  mark: number;
+  name: string;
+  onSale: boolean;
+  paid: boolean;
+  pic: number;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  publishTime: number;
+  size: number;
+  songs: string[];
+  status: number;
+  subType: string;
+  tags: string;
+  type: string;
+}
+
+export interface PurpleArtist1 {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  followed: boolean;
+  id: number;
+  img1V1Id: number;
+  img1V1IdStr: string;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picIdStr: string;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface ArtistElement {
+  albumSize: number;
+  alias: string[];
+  briefDesc: string;
+  followed: boolean;
+  id: number;
+  img1V1Id: number;
+  img1V1IdStr: string;
+  img1V1Url: string;
+  musicSize: number;
+  name: string;
+  picId: number;
+  picUrl: string;
+  topicPerson: number;
+  trans: string;
+}
+
+export interface PlaylistSCollectResponse {
+  code: number;
+  more: boolean;
+  reason: string;
+  subscribers: Subscriber3[];
+  total: number;
+}
+
+export interface Subscriber3 {
+  accountStatus: number;
+  authority: number;
+  authStatus: number;
+  avatarDetail: null | AvatarDetail;
+  avatarImgId: number;
+  subscriberAvatarImgIdStr: null | string;
+  avatarImgIdStr: string;
+  avatarUrl: string;
+  backgroundImgId: number;
+  backgroundImgIdStr: string;
+  backgroundUrl: null | string;
+  birthday: number;
+  city: number;
+  defaultAvatar: boolean;
+  description: string;
+  detailDescription: string;
+  djStatus: number;
+  experts: null;
+  expertTags: null;
+  followed: boolean;
+  gender: number;
+  mutual: boolean;
+  nickname: string;
+  province: number;
+  remarkName: null;
+  signature: string;
+  subscribeTime: number;
+  userId: number;
+  userType: number;
+  vipRights: null;
+  vipType: number;
+}
+
+export interface AvatarDetail {
+  identityIconUrl: string;
+  identityLevel: number;
+  userType: number;
 }

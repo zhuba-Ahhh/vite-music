@@ -26,7 +26,7 @@ declare module 'vue' {
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     Empty: typeof import('./src/components/components/Empty.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
-    Loading: typeof import('./src/components/components/Loading.vue')['default']
+    Loading: typeof import('./src/components/Loading.vue')['default']
     Login: typeof import('./src/components/Login.vue')['default']
     Lyrics: typeof import('./src/components/components/Lyrics.vue')['default']
     MiniBar: typeof import('./src/components/components/PlayBarTmp/MiniBar.vue')['default']
@@ -39,6 +39,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/Search.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
-    SongList: typeof import('./src/components/components/SongList.vue')['default']
+    SongList: typeof import('./src/components/SongList.vue')['default']
   }
 }

@@ -2,24 +2,13 @@ import { ref, reactive, onMounted, toRefs } from 'vue';
 import { ElMessage } from 'element-plus';
 import { hotList, playList, PlayListParams, Tag, Playlist1 } from '../apis';
 
-interface PlaylistInfo {
-  playlist_tags: Partial<Tag>[];
-  playlist_list: Playlist1[];
-  playlist_index: number;
-  playlist_params: PlayListParams;
-  playlist_count: number;
-  playlist_loading: boolean;
-}
-
 export function useHotRecom() {
-  const playlist_info = reactive<PlaylistInfo>({
-    playlist_tags: [],
-    playlist_list: [],
-    playlist_index: 0,
-    playlist_params: { limit: 6, offset: 0 },
-    playlist_count: 6,
-    playlist_loading: true
-  });
+  const playlist_index = ref(0);
+  const playlist_count = ref(0);
+  const playlist_loading = ref(false);
+  const playlist_params = reactive<PlayListParams>({ limit: 6, offset: 0 });
+  const playlist_tags = reactive<Partial<Tag>[]>([]);
+  const playlist_list = reactive<Playlist1[]>([]);
 
   const getHotTags = async () => {
     try {
@@ -30,7 +19,11 @@ export function useHotRecom() {
         throw new Error('数据请求失败');
       }
 
-      playlist_info.playlist_tags = [{ name: '为您推荐' }, ...tags].slice(0, 6);
+      // 使用解构赋值以确保响应性更新
+      tags.unshift({
+        name: '为您推荐'
+    })
+      Object.assign(playlist_tags, tags.slice(0, 6));
     } catch (error) {
       console.error('请求热门标签出错', error);
       ElMessage.error('数据请求失败');
@@ -38,10 +31,10 @@ export function useHotRecom() {
   };
 
   const choosePlayListType = (index: number) => {
-    const { playlist_tags, playlist_params } = playlist_info;
-    playlist_info.playlist_index = index;
+    // 直接修改基本数据类型的引用
+    playlist_index.value = index;
     playlist_params.cat = index !== 0 ? playlist_tags[index].name : '';
-    playlist_info.playlist_loading = true;
+    playlist_loading.value = true;
     getPlayList(playlist_params);
   };
 
@@ -54,8 +47,9 @@ export function useHotRecom() {
         throw new Error('数据请求失败');
       }
 
-      playlist_info.playlist_list = playlists;
-      playlist_info.playlist_loading = false;
+      // 直接修改响应式对象的属性
+      Object.assign(playlist_list, playlists);
+      playlist_loading.value = false;
     } catch (error) {
       console.error('请求歌单列表出错', error);
       ElMessage.error('数据请求失败');
@@ -64,11 +58,19 @@ export function useHotRecom() {
 
   onMounted(() => {
     getHotTags();
-    getPlayList(playlist_info.playlist_params);
+    getPlayList(playlist_params);
   });
 
   return {
-    ...toRefs(playlist_info),
+    // ...toRefs({
+      playlist_index,
+      playlist_count,
+      playlist_loading,
+      playlist_params,
+      playlist_tags,
+      playlist_list
+    // }),
+    ,
     choosePlayListType
   };
 }

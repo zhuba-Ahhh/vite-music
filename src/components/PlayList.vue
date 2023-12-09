@@ -49,11 +49,12 @@ const props = defineProps({
     num: Number,
     loading: Boolean
 });
-const { playList, num, loading } = props;
-console.log(`( playList )===============>`, playList);
-console.log(`( num )===============>`, num);
-console.log(`( loading )===============>`, loading);
 
+// const props = defineProps(['playList', 'loading', 'num']);
+const { playList, num, loading } = props;
+console.log(`( playList1 )===============>`, playList, props.playList);
+console.log(`( num1 )===============>`, num);
+console.log(`( loading1 )===============>`, loading);
 </script>
 <style lang="less" scoped>
 .playlist {

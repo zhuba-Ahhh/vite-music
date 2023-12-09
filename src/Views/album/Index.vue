@@ -1,5 +1,5 @@
 <template>
-    <div class='album' v-if="details">
+    <div class='album' v-if="!!details">
         <div class="detail-container">
             <div class="detail-main">
                 <div class="album-cover">
@@ -90,27 +90,27 @@
 </template>
 
 <script setup lang="ts">
-// import SongList from '@components/SongList.vue'
-// import CommentList from '@components/Comments.vue'
-import { onMounted, reactive } from 'vue'
+import SongList from '../components/SongList.vue'
+import CommentList from '../components/Comments.vue'
+import { onMounted, reactive, toRefs } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { formartDate, formatSongs } from '../../utils';
 // import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus';
 // const { proxy } = getCurrentInstance();
 // const store = useStore();
-import { album, albumDynamic, artistAlbum, albumSub, playlistSCollect, Album1, Privilege, Song } from '../../apis';
+import { album, albumDynamic, artistAlbum, albumSub, playlistSCollect, Album1, Privilege, Song, HotAlbum, Subscriber3, playlistSCollectParams, AlbumDynamicResponse } from '../../apis';
 const route = useRoute();
 const info = reactive<{
     albumId: string,
-    details: Partial<Album1>,
+    details: Album1,
     songList: Song[],
-    dynamic: {},
-    hotAlbums: [],
+    dynamic: Partial<AlbumDynamicResponse>,
+    hotAlbums: HotAlbum[],
     comments: [],
     type: number, // 0: 歌曲 1: mv 2: 歌单 3: 专辑  4: 电台 5: 视频 6: 动态
     isShowDesc: boolean,
-    collects: []
+    collects: Subscriber3[]
 }>({
     // 歌单详情
     albumId: '',
@@ -143,22 +143,22 @@ const getAlbum = async (params: { id: string }) => {
     getArtistAlbum();
 };
 
-const getAlbumDynamic = async (params) => {
-    const { data: res } = await albumDynamic(params)
-
-    if (res.code !== 200) {
+const getAlbumDynamic = async (params: { id: string }) => {
+    const { data } = await albumDynamic(params)
+    const { code, } = data;
+    if (code !== 200) {
         return ElMessage.error('数据请求失败')
     }
-    info.dynamic = res
+    info.dynamic = data
 };
 
 const getArtistAlbum = async () => {
-    const { data: res } = await artistAlbum({ id: info?.details?.artists[0].id, limit: 5 })
-
-    if (res.code !== 200) {
+    const { data } = await artistAlbum({ id: info?.details?.artists[0]?.id, limit: 5 })
+    const { code, hotAlbums } = data;
+    if (code !== 200) {
         return ElMessage.error('数据请求失败')
     }
-    info.hotAlbums = res.hotAlbums
+    info.hotAlbums = hotAlbums
 };
 
 // 专辑简介查看更多
@@ -168,30 +168,30 @@ const showAllDesc = () => {
     }
 };
 
-// const playAllSongs = () => {
-//     store.dispatch('playAll', {
-//         list: info.songList
-//     });
-//     store.commit('SET_PLAYLISTTIPS', true);
-// };
+const playAllSongs = () => {
+    // store.dispatch('playAll', {
+    //     list: info.songList
+    // });
+    // store.commit('SET_PLAYLISTTIPS', true);
+};
 
 const subAlbum = async () => {
-    const { data: res } = await albumSub({ id: info.albumId, t: Number(!info.dynamic.isSub) })
-
-    if (res.code !== 200) {
+    const { data } = await albumSub({ id: info.albumId, t: Number(!info?.dynamic?.isSub) })
+    const { code } = data;
+    if (code !== 200) {
         return ElMessage.error('数据请求失败')
     }
     info.dynamic.isSub = Number(!info.dynamic.isSub)
 };
 
 // 订阅该歌单的用户列表
-const getCollect = async (params) => {
-    const { data: res } = await playlistSCollect(params)
-
-    if (res.code !== 200) {
+const getCollect = async (params: playlistSCollectParams) => {
+    const { data } = await playlistSCollect(params)
+    const { code, subscribers } = data;
+    if (code !== 200) {
         return ElMessage.error('数据请求失败')
     }
-    info.collects = res.subscribers
+    info.collects = subscribers
 };
 
 const _initialize = () => {
@@ -201,14 +201,24 @@ const _initialize = () => {
 };
 
 onMounted(() => {
-    info.albumId = route.query.id;
+    info.albumId = String(route.query.id);
     _initialize()
 });
 
 onBeforeRouteUpdate((to) => {
-    info.albumId = to.query.id;
+    info.albumId = String(to.query.id);
     _initialize()
 })
+
+const {
+    albumId,
+    details,
+    songList,
+    dynamic,
+    hotAlbums,
+    type,
+    isShowDesc,
+} = toRefs(info)
 
 </script>
 <style scoped lang="less">
